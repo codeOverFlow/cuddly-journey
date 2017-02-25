@@ -11,12 +11,13 @@ PROCEDURE Craps IS
 BEGIN
    Partie.Init_Partie;
    Put_Line("Bienvenue au craps ! vous avez un portefeuille de " & Natural'Image(PorteFeuille) & "$");
-   Partie.miser(PorteFeuille);
 
-   WHILE Partie.Get_Mise /= 0 LOOP
-      Partie.Lance_De;
-      Partie.Calcul_De(PorteFeuille);
-      Partie.Miser(PorteFeuille);
+   WHILE PorteFeuille /= 0 LOOP
+      Partie.miser(PorteFeuille);
+      IF Partie.Get_Mise = 0 THEN
+         EXIT;
+      END IF;
+      Partie.Jouer(PorteFeuille);
    END LOOP;
 
 END Craps;
